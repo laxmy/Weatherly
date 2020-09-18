@@ -1,0 +1,72 @@
+h4{
+    font-size: 1.5em;
+}
+h6{
+    font-size: 1.2em;
+    font-weight: 400;
+}
+.numberedText{
+    font-family: 'Roboto'
+}
+.yellow{
+    color: #FFBD50;
+}
+
+.grey{
+    color:#ADB1CC;
+}
+.blue{
+    color:#333866;
+}
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2%;
+    margin: 0.6%;
+    width: 100%;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.rowHeader{
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftAligned{
+    align-self: center;
+    justify-content: flex-start;
+}
+
+.evenSpaced{
+    align-items: center;
+    justify-content: space-around;
+}
+
+.square{
+    height: 60px;
+    width:  60px;
+    border-radius: 30%;
+    background-color: #d7dbf7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed{
+    width: 50%;
+}

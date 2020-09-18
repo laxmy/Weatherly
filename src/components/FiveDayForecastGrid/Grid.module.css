@@ -1,0 +1,26 @@
+.table {
+    text-align: center;
+    font-family: 'Roboto', 'sans-serif';
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+    padding: 2%;
+  }
+
+.table tr{
+    border-bottom: 1px solid #ADB1CC;
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.table tr td{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    flex:1;
+}
