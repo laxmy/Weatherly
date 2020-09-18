@@ -1,4 +1,4 @@
-export const WeatherUrlPrefix = 'http://api.openweathermap.org/data/2.5/forecast'
+export const WeatherUrlPrefix = 'https://api.openweathermap.org/data/2.5/forecast'
 
 export const ApiKey = 'df9364ba64956cc49b082ee2fdca8833'
 

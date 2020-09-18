@@ -1,9 +1,11 @@
-h4{
-    font-size: 1.5em;
+.headerContent{
+    font-size: 2vw;
 }
-h6{
-    font-size: 1.2em;
-    font-weight: 400;
+.subHeader{
+    font-size: 1vw;
+}
+.highLight{
+    font-size: 4vw;
 }
 .numberedText{
     font-family: 'Roboto'
@@ -52,11 +54,6 @@ h6{
     justify-content: flex-start;
 }
 
-.evenSpaced{
-    align-items: center;
-    justify-content: space-around;
-}
-
 .square{
     height: 60px;
     width:  60px;
@@ -67,6 +64,10 @@ h6{
     justify-content: center;
 }
 
-.fixed{
+.halfWidth{
     width: 50%;
+}
+
+.fullWidth{
+ width: 100%
 }
