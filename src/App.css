@@ -21,7 +21,15 @@ p{
   font-size: 14px;
   font-weight: 200;
 }
-
+.centeredContent{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+/* Important for charts to be responsive*/
 .highcharts-container{
   width: 100% !important;
 }

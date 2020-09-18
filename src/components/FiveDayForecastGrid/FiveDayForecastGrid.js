@@ -7,7 +7,6 @@ const getFormattedDate = (unixTimestamp,zoneOff) =>{
 }
 
 const FiveDayForecastGrid = ({fiveDayForecast,zone}) =>{
-    console.log(fiveDayForecast)
   return (
     <table id="dayForecast-Table" className={styles.table}>
     <thead>

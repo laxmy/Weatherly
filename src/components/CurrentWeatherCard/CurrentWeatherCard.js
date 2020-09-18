@@ -15,7 +15,7 @@ const CurrentWeatherCard = ({currentWeather, location}) =>{
               <div className={styles.column}>
                 <h4 className={`${styles.headerContent}`}>{`${location.name},${location.country}`}</h4>
                 <h6 className={`${styles.grey} ${styles.numberedText} ${styles.fullWidth} ${styles.subHeader}`}>
-                  Updated {moment().format('DD MM YY hh:MM A')}
+                  Updated {moment().format('DD MMM YY hh:MM A')}
                 </h6>
               </div>
             </div>

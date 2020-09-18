@@ -66,7 +66,7 @@ const generateInfoCardContent = (data, itemName)=>{
 }
 
 const WeatherCardMain =({weather})=>{
-    console.log(weather.details)
+  
     const currentWeather = weather.data[0]
     return(
         <div className={styles.container}>

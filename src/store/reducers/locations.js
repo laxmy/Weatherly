@@ -4,10 +4,10 @@ const getFiveDaysTemps = list => {
 }
 
 const locations = (state = {locationData:{}, error: false, loading: false}, action) => {
-    console.log(action.data)
     switch (action.type) {
       case 'ADD_LOCATION_DATA':
         {
+          //Replacing the location with a brand new object as we deal with only one location at a time
           let locData = {
             location: action.data.city,
             data: action.data.list,

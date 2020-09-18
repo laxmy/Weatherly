@@ -4,6 +4,7 @@ import {addLocation} from'./store/actions'
 import './App.css';
 import WeatherCardMain from './components/WeatherCardMain/WeatherCardMain';
 import SearchBar from './components/SearchBar/Searchbar'
+import { MoonLoader}  from 'react-spinners'
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
   },[dispatch])
 
   const{ locationData, error,loading} = useSelector(state => state.locations)
-
+  let cardContent = (loading || !locationData.data) ? <MoonLoader/>:  <WeatherCardMain weather={locationData}/>
   return (
       <div className="App">
         <header className="App-header">
@@ -36,7 +37,11 @@ function App() {
             submitEnabled={input !==''}
             error ={error} />
         </header>
-        {locationData.data && <WeatherCardMain weather={locationData}/>}
+        <div class ="centeredContent">
+          {cardContent}
+        </div>
+       
+       
       </div>
   );
 }
