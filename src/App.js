@@ -12,6 +12,17 @@ function App() {
 
   const dispatch = useDispatch()
 
+  const{ locationData, error,loading} = useSelector(state => state.locations)
+
+  useEffect(() => {
+    let interval = null;
+    interval = setInterval(() => {
+      console.log("Auto-refresh")
+      dispatch(addLocation(locationData.location.name))
+    }, 1000 * 60 * 60 *2)
+    return () => clearInterval(interval)
+  })
+
   //Fetch new data 
   const handleSearch = e => {
     e.preventDefault()
@@ -21,10 +32,9 @@ function App() {
   //default location that runs for first time
   useEffect(()=>{
     dispatch(addLocation('Vancouver'))
-
   },[dispatch])
 
-  const{ locationData, error,loading} = useSelector(state => state.locations)
+  
   let cardContent = (loading || !locationData.data) ? <MoonLoader/>:  <WeatherCardMain weather={locationData}/>
   return (
       <div className="App">

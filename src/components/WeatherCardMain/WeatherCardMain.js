@@ -71,7 +71,7 @@ const WeatherCardMain =({weather})=>{
     return(
         <div className={styles.container}>
             <div className={styles.centeredContainer}>
-                <CurrentWeatherCard currentWeather={currentWeather} location={weather.location}/>
+                <CurrentWeatherCard currentWeather={currentWeather} location={weather.location} lastUpdate={weather.lastUpdated}/>
             </div>
             <div className  ={styles.cardContainer}>
                 { CurrentWeatherDetails.map((item,index) => 

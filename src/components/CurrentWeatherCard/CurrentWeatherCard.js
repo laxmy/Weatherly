@@ -5,7 +5,8 @@ import SquareIndicator from './SquareIndicator'
 
 import styles from './CurrentWeatherCard.module.css'
 
-const CurrentWeatherCard = ({currentWeather, location}) =>{
+const CurrentWeatherCard = ({currentWeather, location,lastUpdate}) =>{
+  
     const icon = "wi-owm-"+ currentWeather.weather[0].id;
   return (
         <div className={styles.cardContainer}>
@@ -15,7 +16,7 @@ const CurrentWeatherCard = ({currentWeather, location}) =>{
               <div className={styles.column}>
                 <h4 className={`${styles.headerContent}`}>{`${location.name},${location.country}`}</h4>
                 <h6 className={`${styles.grey} ${styles.numberedText} ${styles.fullWidth} ${styles.subHeader}`}>
-                  Updated {moment().format('DD MMM YY hh:MM A')}
+                  Updated {moment(lastUpdate).format('DD MMM YY h:mm:ss a')}
                 </h6>
               </div>
             </div>

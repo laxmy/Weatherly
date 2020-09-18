@@ -22,7 +22,8 @@ const locations = (state = {locationData:{}, error: false, loading: false}, acti
               clouds: action.data.list[0].clouds.all,
             },
             nextFiveReadings: action.data.list.slice(1,5),
-            fiveDayForecast: getFiveDaysTemps(action.data.list)
+            fiveDayForecast: getFiveDaysTemps(action.data.list),
+            lastUpdated: Date.now(),
           }
         return ({locationData:locData, error: false, loading: false})
         }
