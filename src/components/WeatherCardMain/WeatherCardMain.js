@@ -1,5 +1,6 @@
 import React,{Fragment} from 'react'
 import moment from 'moment-timezone'
+import PropTypes from 'prop-types'
 
 import { CurrentWeatherDetails } from '../../constants'
 import FiveDayForecastGrid from '../FiveDayForecastGrid/FiveDayForecastGrid'
@@ -7,6 +8,7 @@ import InfoCard from '../InfoCard/InfoCard'
 import SparkLineGraph from '../SparkLineGraph'
 import CurrentWeatherCard from '../CurrentWeatherCard/CurrentWeatherCard'
 import WeatherIcons from 'react-weathericons'
+import * as Constants from '../../constants'
 
 import styles from './WeatherCardMain.module.css'
 
@@ -35,7 +37,7 @@ const generateInfoCardContent = (data, itemName)=>{
             return (
                 <Fragment>
                     <WeatherIcons name={itemToRender.iconName[0]} className={`${itemToRender.iconName[0]} ${styles.cardIcon}`} /> 
-                    <p className={styles.cardContentMain}>{data.humidity} %</p>
+                    <p className={styles.cardContentMain}>{`${data.humidity} ${Constants.Percentage}`}</p>
                 </Fragment>
             )
         }
@@ -58,7 +60,7 @@ const generateInfoCardContent = (data, itemName)=>{
             return(
                 <Fragment>
                     <WeatherIcons name={itemToRender.iconName[0]} className={`${itemToRender.iconName[0]} ${styles.cardIcon}`} /> 
-                    <p className={styles.cardContentMain}>{data.clouds} %</p>
+                    <p className={styles.cardContentMain}>{`${data.clouds} ${Constants.Percentage}`}</p>
                 </Fragment>
             )
         }
@@ -91,5 +93,8 @@ const WeatherCardMain =({weather})=>{
 
 }
 
+WeatherCardMain.propTypes = {
+ weather: PropTypes.object,   
+}
 
 export default WeatherCardMain

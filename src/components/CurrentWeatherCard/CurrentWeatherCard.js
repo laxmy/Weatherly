@@ -1,7 +1,10 @@
 import React from 'react'
 import WeatherIcons from 'react-weathericons'
 import moment from 'moment'
+import PropTypes from 'prop-types'
+
 import SquareIndicator from './SquareIndicator'
+import * as Constants from '../../constants'
 
 import styles from './CurrentWeatherCard.module.css'
 
@@ -49,10 +52,10 @@ const CurrentWeatherCard = ({currentWeather, location,lastUpdate}) =>{
              {/* Row 4 */}
              <div className={styles.row}> 
               <div className={styles.column}>
-                <SquareIndicator indicator={'Cloudiness'} value={currentWeather.clouds.all} unit={'%'} iconName={'wi-cloud'} />
+                <SquareIndicator indicator={'Cloudiness'} value={currentWeather.clouds.all} unit={Constants.Percentage} iconName={'wi-cloud'} />
               </div>
               <div className={styles.column}>
-                <SquareIndicator indicator={'Precipitation'} value={currentWeather.pop} unit={'%'} iconName={'wi-raindrop'} />
+                <SquareIndicator indicator={'Precipitation'} value={currentWeather.pop} unit={Constants.Percentage} iconName={'wi-raindrop'} />
               </div>
               <div className={styles.column}>
                 <SquareIndicator indicator={'Rain'} value={currentWeather.rain ? currentWeather.rain['3h']: 0} unit={'mm'} iconName={'wi-umbrella'} />
@@ -60,6 +63,12 @@ const CurrentWeatherCard = ({currentWeather, location,lastUpdate}) =>{
              </div>
         </div>
   )
+}
+
+CurrentWeatherCard.propTypes={
+  currentWeather: PropTypes.object,
+  location: PropTypes.object,
+  lastUpdate: PropTypes.instanceOf(Date),
 }
 
 export default CurrentWeatherCard

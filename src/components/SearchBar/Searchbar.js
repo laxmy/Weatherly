@@ -1,6 +1,6 @@
 
 import React from 'react'
-
+import PropTypes from 'prop-types';
 import classes from './Searchbar.module.css';
 
 const SearchBar = (props) => {
@@ -30,4 +30,13 @@ const SearchBar = (props) => {
     );
 }
 
+SearchBar.propTypes = {
+    onClickHandler: PropTypes.func,
+    onChangeHandler: PropTypes.func,
+    submitEnabled: PropTypes.bool,
+    error: PropTypes.bool,
+}
+
 export default SearchBar
+
+

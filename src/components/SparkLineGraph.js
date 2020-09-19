@@ -1,7 +1,10 @@
 import React from 'react'
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official'
-import moment from 'moment'
+import PropTypes from 'prop-types'
+
+import * as Constants from '../constants'
+
 const options = {
     chart: {
       type: 'spline',
@@ -14,7 +17,7 @@ const options = {
         minorGridLineWidth: 0,
         offset: 5,
         title: {
-            text: 'Temperature (°C)'
+            text: `Temperature (${Constants.DegreeCelcuis})`
         }
     },
     xAxis:{
@@ -44,7 +47,7 @@ const options = {
     tooltip:{
         formatter: function () {
            // let time = moment(this.x).utcOffset(Highcharts.time.(this.x)).format('hh:mm A')
-            return `${this.y} °C`
+            return `${this.y} ${Constants.DegreeCelcuis}`
         }
         
     },
@@ -62,5 +65,9 @@ const SparkLineGraph = ({nextFive, zone}) => {
   )
 }
 
+SparkLineGraph.propTypes={
+    nextFive: PropTypes.array,
+    zone: PropTypes.number
+}
 
 export default SparkLineGraph

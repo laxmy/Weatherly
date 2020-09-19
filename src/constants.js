@@ -35,4 +35,7 @@ export const CurrentWeatherDetails =[
    
 ]
 
+export const DegreeCelcuis = '°C'
+export const Percentage ='%'
+
 
