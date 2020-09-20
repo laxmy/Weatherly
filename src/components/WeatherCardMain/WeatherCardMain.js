@@ -69,6 +69,14 @@ const generateInfoCardContent = (data, itemName) => {
 
 const WeatherCardMain = ({ weather }) => {
 
+    if (!weather ||!weather.data || weather.data.length<=0)
+        return (
+            <div className={styles.centeredContainer}>
+                <h5> Error Occured </h5>
+                <h6>An error occured! Data is not available. Please try after sometime</h6>
+            </div>
+        )
+
     const currentWeather = weather.data[0]
     return (
         <div className={styles.container}>
@@ -77,7 +85,7 @@ const WeatherCardMain = ({ weather }) => {
             </div>
             <div className={styles.cardContainer}>
                 {CurrentWeatherDetails.map((item, index) =>
-                    <InfoCard item={item} key={index} data={weather.details}>
+                    <InfoCard title={item.name} key={index}>
                         {generateInfoCardContent(weather.details, item.name)}
                     </InfoCard>)}
             </div>

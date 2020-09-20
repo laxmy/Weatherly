@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 
 import styles from './CurrentWeatherCard.module.css'
 
-const SquareIndicator = props => {
+const SquareIndicator = ({iconName, indicator,value, unit}) => {
+    let val = isNaN(value) ? 'NA': value
     return (
         <Fragment>
-            <div className={styles.square}> <WeatherIcons name="drop" className={`${props.iconName} ${styles.blue}`} /> </div>
+            <div className={styles.square}> <WeatherIcons name="drop" className={`${iconName} ${styles.blue}`} /> </div>
             <p className={`${styles.grey} ${styles.numberedText}`}>
-                {`${props.indicator}: ${props.value} ${props.unit}`}
+                {`${indicator}: ${val} ${unit}`}
             </p>
         </Fragment>
     )

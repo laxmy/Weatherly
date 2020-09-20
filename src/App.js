@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState,Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addLocation } from './store/actions'
 import './App.css';
@@ -14,7 +14,7 @@ function App() {
 
   const { locationData, error, loading } = useSelector(state => state.locations)
 
-  useEffect(() => {
+  React.useEffect(() => {
     let interval = null;
     interval = setInterval(() => {
       console.log("Auto-refresh")
@@ -30,12 +30,21 @@ function App() {
   }
 
   //default location that runs for first time
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(addLocation('Vancouver'))
   }, [dispatch])
 
 
   let cardContent = (loading || !locationData.data) ? <MoonLoader /> : <WeatherCardMain weather={locationData} />
+  if (error && !locationData.data) {
+    cardContent = (
+      <Fragment>
+        <h5> Error Occured </h5>
+        <h6>An error occured! Please enter a valid city name to look up</h6>
+      </Fragment>
+      )
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -50,8 +59,6 @@ function App() {
       <div class="centeredContent">
         {cardContent}
       </div>
-
-
     </div>
   );
 }
