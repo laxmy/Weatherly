@@ -1,22 +1,21 @@
-import React,{Fragment} from 'react'
+import React, { Fragment } from 'react'
 import WeatherIcons from 'react-weathericons'
 import PropTypes from 'prop-types'
 
 import styles from './CurrentWeatherCard.module.css'
 
-const SquareIndicator = props =>{
+const SquareIndicator = props => {
     return (
         <Fragment>
-             <div className={styles.square}> <WeatherIcons name="drop" className={`${props.iconName} ${styles.blue}`} /> </div>
-              <p className={`${styles.grey} ${styles.numberedText}`}>
+            <div className={styles.square}> <WeatherIcons name="drop" className={`${props.iconName} ${styles.blue}`} /> </div>
+            <p className={`${styles.grey} ${styles.numberedText}`}>
                 {`${props.indicator}: ${props.value} ${props.unit}`}
-             </p>
+            </p>
         </Fragment>
-       
     )
 }
 
-SquareIndicator.propTypes={
+SquareIndicator.propTypes = {
     iconName: PropTypes.string,
     indicator: PropTypes.string,
     value: PropTypes.number,

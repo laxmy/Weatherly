@@ -7,12 +7,12 @@ import * as Constants from '../constants'
 
 const options = {
     chart: {
-      type: 'spline',
+        type: 'spline',
     },
     title: {
-      text: 'Next 12 hours'
+        text: 'Next 12 hours'
     },
-    yAxis:{ 
+    yAxis: {
         gridLineWidth: 0,
         minorGridLineWidth: 0,
         offset: 5,
@@ -20,13 +20,13 @@ const options = {
             text: `Temperature (${Constants.DegreeCelcuis})`
         }
     },
-    xAxis:{
-        title:{
-            text:''
+    xAxis: {
+        title: {
+            text: ''
         },
         type: 'datetime',
         dateTimeLabelFormats: {
-            minute:  '%I:%M',
+            minute: '%I:%M',
             hour: '%I:%M'
         }
     },
@@ -35,37 +35,37 @@ const options = {
     },
     plotOptions: {
         series: {
-            color: '#333866',  
+            color: '#333866',
         }
     },
     series: [{
-      data:[],
+        data: [],
     }],
     credits: {
         enabled: false
     },
-    tooltip:{
+    tooltip: {
         formatter: function () {
-           // let time = moment(this.x).utcOffset(Highcharts.time.(this.x)).format('hh:mm A')
+            // let time = moment(this.x).utcOffset(Highcharts.time.(this.x)).format('hh:mm A')
             return `${this.y} ${Constants.DegreeCelcuis}`
         }
-        
+
     },
     time: {
         useUTC: false
     }
 
-  }
-const SparkLineGraph = ({nextFive, zone}) => {
-    const data = nextFive.map(item =>([item.dt*1000,item.main.temp]))
-    options.series[0].data = data   
+}
+const SparkLineGraph = ({ nextFive, zone }) => {
+    const data = nextFive.map(item => ([item.dt * 1000, item.main.temp]))
+    options.series[0].data = data
     options.time.timezoneOffset = zone
-  return (
-    <HighchartsReact highcharts={Highcharts} options={options} />
-  )
+    return (
+        <HighchartsReact highcharts={Highcharts} options={options} />
+    )
 }
 
-SparkLineGraph.propTypes={
+SparkLineGraph.propTypes = {
     nextFive: PropTypes.array,
     zone: PropTypes.number
 }
