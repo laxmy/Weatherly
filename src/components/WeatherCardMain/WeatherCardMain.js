@@ -27,11 +27,11 @@ const generateInfoCardContent = (data, itemName) => {
         case 'SunRise And SunSet':
             return (
                 <Fragment>
-                    <WeatherIcons name={itemToRender.iconName[0]} className={`${itemToRender.iconName[0]} ${styles.cardIcon}`} />
+                <WeatherIcons name={itemToRender.iconName[0]} className={`${itemToRender.iconName[0]} ${styles.cardIcon}`} />
                     <p className={styles.cardContentMain}>{moment(data.sunrise * 1000).utcOffset(data.utcOffset / 60).format(' hh:mm A')} </p>
-                    <WeatherIcons name={itemToRender.iconName[0]} className={`${itemToRender.iconName[1]} ${styles.cardIcon}`} />
+                <WeatherIcons name={itemToRender.iconName[0]} className={`${itemToRender.iconName[1]} ${styles.cardIcon}`} />
                     <p className={styles.cardContentMain}>{moment(data.sunset * 1000).utcOffset(data.utcOffset / 60).format(' hh:mm A')}</p>
-                </Fragment>
+            </Fragment>
             )
         case 'Humidity': {
             return (
@@ -67,34 +67,33 @@ const generateInfoCardContent = (data, itemName) => {
     }
 }
 
-const WeatherCardMain = ({ weather }) => {
+const WeatherCardMain = ({ weatherDetails}) => {
 
-    if (!weather ||!weather.data || weather.data.length<=0)
-        return (
-            <div className={styles.centeredContainer}>
-                <h5> Error Occured </h5>
-                <h6>An error occured! Data is not available. Please try after sometime</h6>
-            </div>
-        )
+    if (!weatherDetails ||!weatherDetails.details)  
+    return (
+        <div className={styles.centeredContainer}>
+            <h5> Error Occured </h5>
+            <h6>An error occured! Data is not available. Please try after sometime</h6>
+        </div>
+    )
 
-    const currentWeather = weather.data[0]
     return (
         <div className={styles.container}>
             <div className={styles.centeredContainer}>
-                <CurrentWeatherCard currentWeather={currentWeather} location={weather.location} lastUpdate={weather.lastUpdated} />
+                <CurrentWeatherCard currentWeather={weatherDetails.details.currentWeather} location={weatherDetails.location} lastUpdate={weatherDetails.lastUpdated} />
             </div>
             <div className={styles.cardContainer}>
                 {CurrentWeatherDetails.map((item, index) =>
                     <InfoCard title={item.name} key={index}>
-                        {generateInfoCardContent(weather.details, item.name)}
+                        {generateInfoCardContent(weatherDetails.details, item.name)}
                     </InfoCard>)}
             </div>
 
             <div className={styles.centeredContainer}>
-                <SparkLineGraph nextFive={weather.nextFiveReadings} zone={weather.details.utcOffset} />
+                <SparkLineGraph nextFive={weatherDetails.nextFiveReadings} zone={weatherDetails.details.utcOffset} />
             </div>
 
-            <FiveDayForecastGrid fiveDayForecast={weather.fiveDayForecast} zone={weather.details.utcOffset} />
+            <FiveDayForecastGrid fiveDayForecast={weatherDetails.fiveDayForecast} zone={weatherDetails.details.utcOffset} />
 
         </div>
     )
@@ -102,7 +101,7 @@ const WeatherCardMain = ({ weather }) => {
 }
 
 WeatherCardMain.propTypes = {
-    weather: PropTypes.object,
+    weatherDetails: PropTypes.object,
 }
 
 export default WeatherCardMain

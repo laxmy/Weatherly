@@ -17,7 +17,7 @@ const CurrentWeatherCard = ({ currentWeather, location, lastUpdate }) => {
       {/* Row1 */}
       <div className={`${styles.row} ${styles.leftAligned}`}>
         <div className={styles.column}>
-          <h4 className={`${styles.headerContent}`}>{`${location.name},${location.country}`}</h4>
+          <h4 className={`${styles.headerContent}`}>{`${location.city},${location.country}`}</h4>
           <h6 className={`${styles.grey} ${styles.numberedText} ${styles.fullWidth} ${styles.subHeader}`}>
             Updated {moment(lastUpdate).format('DD MMM YY h:mm:ss a')}
           </h6>

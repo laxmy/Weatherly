@@ -1,24 +1,85 @@
 import React, { useState,Fragment } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addLocation } from './store/actions'
 import './App.css';
 import WeatherCardMain from './components/WeatherCardMain/WeatherCardMain';
 import SearchBar from './components/SearchBar/Searchbar'
 import { MoonLoader } from 'react-spinners'
+import * as Constants from './constants'
+
+const getFiveDaysTemps = list => {
+  let weatherForecastArray = Object.keys(list).map(key => list[key]);
+  return weatherForecastArray.filter((value, index) => index % 8 === 0).map(({ dt, dt_txt, main, clouds }) => ({ dt, dt_txt, main, clouds }));
+}
 
 function App() {
 
   const [input, setInput] = useState('')
 
-  const dispatch = useDispatch()
-
-  const { locationData, error, loading } = useSelector(state => state.locations)
+  const [weatherData, setWeatherData]= useState({
+    locationData:{},
+    error: false,
+    loading: false,
+  })
+   // Fetch weather information and update state
+   const fetchWeatherData = (location) => {
+    const URL = `${Constants.WeatherUrlPrefix}?q=${location}&appid=${Constants.ApiKey}&units=metric`
+    setWeatherData({
+      weatherDetails: {},
+      loading: true,
+      error: false
+    })
+      // Executed as callback function
+      fetch(URL)
+        .then(res => res.json())
+        .then(data => {
+          // If city exists, update weather details
+          console.log(data)
+          if(data.cod === '200') {
+            setWeatherData({
+              weatherDetails:{
+                location: {
+                  city: data.city.name,
+                  country: data.city.country,
+                },
+                details: {
+                  currentWeather: data.list[0],
+                  sunrise: data.city.sunrise,
+                  sunset: data.city.sunset,
+                  utcOffset: data.city.timezone / 60,
+                  pressure: data.list[0].main.pressure,
+                  humidity: data.list[0].main.humidity,
+                  wind: data.list[0].wind,
+                  visibility: data.list[0].visibility / 1000,
+                  clouds: data.list[0].clouds.all,
+                },
+                nextFiveReadings: data.list.slice(1, 5),
+                fiveDayForecast: getFiveDaysTemps(data.list),
+                lastUpdated: Date.now(),
+              },
+              loading: false,
+              error: false
+            })
+          } else {
+            // If city doesn't exist, throw error
+            setWeatherData({
+             ...weatherData,
+              error: true
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          setWeatherData({
+            ...weatherData,
+             error: true
+           })
+        })
+  }
 
   React.useEffect(() => {
     let interval = null;
     interval = setInterval(() => {
       console.log("Auto-refresh")
-      dispatch(addLocation(locationData.location.name))
+      fetchWeatherData(weatherData.weatherDetails.location.name)
     }, 1000 * 60 * 60 * 2)
     return () => clearInterval(interval)
   })
@@ -26,17 +87,17 @@ function App() {
   //Fetch new data 
   const handleSearch = e => {
     e.preventDefault()
-    dispatch(addLocation(input))
+    fetchWeatherData(input)
   }
 
   //default location that runs for first time
   React.useEffect(() => {
-    dispatch(addLocation('Vancouver'))
-  }, [dispatch])
+    fetchWeatherData('Vancouver')
+  },[])
 
-
-  let cardContent = (loading || !locationData.data) ? <MoonLoader /> : <WeatherCardMain weather={locationData} />
-  if (error && !locationData.data) {
+ console.log(weatherData)
+  let cardContent = (weatherData.loading || !weatherData.weatherDetails===null) ? <MoonLoader /> : <WeatherCardMain weatherDetails={weatherData.weatherDetails} />
+  if (weatherData.error && !weatherData.weatherDetails.location) {
     cardContent = (
       <Fragment>
         <h5> Error Occured </h5>
@@ -54,9 +115,9 @@ function App() {
           onChangeHandler={e => setInput(e.target.value)}
           onClickHandler={handleSearch}
           submitEnabled={input !== ''}
-          error={error} />
+          error={weatherData.error} />
       </header>
-      <div class="centeredContent">
+      <div className="centeredContent">
         {cardContent}
       </div>
     </div>
